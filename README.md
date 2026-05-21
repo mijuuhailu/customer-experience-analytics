@@ -1,170 +1,87 @@
-# Fintech Review Analytics
+#  Mobile Banking Review Analysis - Omega Consultancy
 
-A real-world data engineering and NLP project focused on analyzing Google Play Store reviews for major Ethiopian banking applications.
-
-## Project Overview
-
-This project was developed as part of a fintech analytics challenge for Omega Consultancy. The goal is to collect, preprocess, analyze, and visualize customer reviews from Ethiopian mobile banking applications in order to generate actionable business insights.
-
-The analysis focuses on three Ethiopian banks:
-
-- Commercial Bank of Ethiopia (CBE)
-- Bank of Abyssinia (BOA)
-- Dashen Bank
-
-The project aims to help product teams understand:
-
-- Common customer complaints
-- User satisfaction drivers
-- Feature requests
-- Sentiment trends
-- Areas requiring product improvement
+Omega Consultancy is spearheading a data-driven initiative to support leading banks in enhancing their mobile banking applications, with a strategic focus on improving customer satisfaction and retention. This project involves the collection and analysis of user-generated reviews from the Google Play Store for three major Ethiopian banks—Commercial Bank of Ethiopia (CBE), Bank of Abyssinia (BOA), and Dashen Bank. Using natural language processing (NLP) techniques, the objective is to extract sentiment (positive, negative, or neutral) and identify recurring themes such as bugs, user interface issues, performance problems, and feature requests.
 
 ---
 
-# Objectives
+## Objectives
 
-## Task 1 — Data Collection and Preprocessing
+- Scrape user reviews from the Google Play Store for selected banking apps.
 
-The objective of this phase is to:
+- Preprocess, clean, and standardize review data.
 
-- Scrape reviews from the Google Play Store
-- Clean and preprocess the data
-- Store the dataset in CSV format
-- Manage the project using Git and GitHub best practices
+- Perform sentiment analysis and thematic keyword extraction.
+
+- Identify user satisfaction drivers and pain points.
+
+- Store cleaned data in a PostgreSQL database for long-term accessibility.
+
+- Visualize findings and deliver actionable recommendations.
+---
+## Contributions
+### Review Collection:
+ Scraped over 1,200 user reviews from the Google Play Store across three major banks using google-play-scraper.
+
+### Data Preprocessing:
+ Standardized review datasets by removing duplicates, normalizing date formats, and handling missing values for consistency and analysis-readiness.
+
+### Sentiment Analysis:
+ Implemented VADER to classify review sentiment as positive, negative, or neutral. Originally explored transformer-based models like distilbert-base-uncased-finetuned-sst-2-english, but shifted due to performance constraints.
+
+### Thematic Analysis:
+ Used TF-IDF and keyword extraction to identify common themes such as login issues, UI satisfaction, and network performance across banks.
+
+### Database Integration:
+ Designed a PostgreSQL schema and programmatically inserted the cleaned dataset into relational tables for scalable storage and enterprise readiness.
+
+### Insight Generation:
+ Identified key satisfaction drivers and pain points, aiding targeted recommendations for mobile banking app improvements.
+
+### Visualization:
+ Created keyword clouds and bar charts to support findings and aid in stakeholder communication.
+
+##  Methodology
+
+### Data Collection & Preprocessing
+Collected 400+ reviews per bank using google-play-scraper. Cleaned the data by removing duplicates, normalizing dates, and standardizing column names.
+
+### Sentiment & Thematic Analysis
+Applied VADER for sentiment classification. Extracted keywords using TF-IDF to group reviews into themes like UI experience, transaction issues, and feature requests.
+
+### Database Integration
+Designed and implemented a PostgreSQL database schema to store cleaned reviews, including associated metadata and sentiment scores.
+
+### Insights & Visualization
+Analyzed sentiment and theme distribution across banks. Visualized trends using bar charts and keyword clouds to support improvement recommendations.
 
 ---
+## Future Plans
+- Replace the VADER model with more advanced transformer-based models (e.g., distilbert-base-uncased-finetuned-sst-2-english) for improved sentiment accuracy.
 
-# Technologies Used
+- Implement unit tests to ensure code robustness and maintainability as the project scales.
+--- 
+## Tools Used
 
-- Python
-- Pandas
-- NumPy
-- google-play-scraper
-- Git & GitHub
-- GitHub Actions (CI/CD)
+Python 3.10+: Core programming language.
 
----
+- google-play-scraper: For scraping mobile app reviews.
 
-# Project Structure
+- pandas / NumPy: For data cleaning, manipulation, and analysis.
 
-```bash
-fintech-review-analytics/
-│
-├── .github/
-│   └── workflows/
-│       └── ci.yml
-│
-├── data/
-│
-├── notebooks/
-│
-├── src/
-│   ├── scrape_reviews.py
-│   └── preprocess.py
-│
-├── tests/
-│
-├── .gitignore
-├── README.md
-├── requirements.txt
-```
+- NLTK / VADER: For sentiment analysis.
+
+- scikit-learn: For TF-IDF keyword extraction and preprocessing.
+
+- Matplotlib / Seaborn / WordCloud: For visualizations and exploratory analysis.
+
+- PostgreSQL: Used as the relational database to store cleaned and enriched review data.
+
+- psycopg2 / SQLAlchemy: For database connections and SQL operations.
+
+- Git / GitHub: For version control and collaboration.
 
 ---
+## Conclusion 
 
-# Data Source
-
-The data was collected from the Google Play Store using the `google-play-scraper` Python package.
-
-Source:
-- Google Play Store reviews
-
----
-
-# Banks and Applications
-
-| Bank | App ID |
-|---|---|
-| CBE | `com.combanketh.mobilebanking` |
-| BOA | `com.boa.boaMobileBanking` |
-| Dashen | `com.dashen.dashensuperapp` |
-
----
-
-# Data Collection Methodology
-
-Reviews were scraped using the `reviews()` function from the `google-play-scraper` library.
-
-The following information was collected:
-
-- Review text
-- Rating (1–5)
-- Review date
-- Bank name
-- Source platform
-
-### Scraping Configuration
-
-- Language: English (`lang='en'`)
-- Country: Ethiopia (`country='et'`)
-- Sorting: Newest reviews
-- Target: 400+ reviews per bank
-
----
-
-# Preprocessing Steps
-
-The preprocessing pipeline performs the following operations:
-
-1. Remove duplicate reviews
-2. Drop rows with missing review text or ratings
-3. Normalize date format to `YYYY-MM-DD`
-4. Save cleaned dataset as CSV
-
-Final dataset columns:
-
-| Column | Description |
-|---|---|
-| review | User review text |
-| rating | Star rating |
-| date | Review date |
-| bank | Bank name |
-| source | Data source |
-
----
-
-# Output
-
-The cleaned dataset is saved locally as:
-
-```bash
-data/cleaned_reviews.csv
-```
-
-Note:
-The `data/` directory and CSV files are excluded from Git tracking using `.gitignore`.
-
----
-
-
----
-
-# Limitations
-
-- Some applications may return fewer reviews depending on Google Play availability.
-- Google Play may enforce rate limits during scraping.
-- Some reviews may contain mixed languages or incomplete text.
-- Historical reviews may be limited by the scraper API.
-
----
-
-# Future Improvements
-
-- Sentiment analysis using DistilBERT
-- Theme extraction using TF-IDF and spaCy
-- PostgreSQL database integration
-- Interactive dashboards and visualizations
-- Automated testing pipeline
-
----
+This project successfully analyzed user feedback from banking apps to identify key satisfaction drivers and recurring pain points. By combining sentiment analysis with thematic keyword extraction, we surfaced actionable insights to guide app improvements. The structured pipeline and database integration ensure scalability and real-world applicability for ongoing product enhancement.
 
